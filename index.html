@@ -12,11 +12,16 @@
 </head>
 <body>
     <div id="auth-portal">
-        <div class="auth-card">
-            <h1 class="logo">SAVESENSE</h1>
-            <p class="auth-sub">Neural Financial Intelligence</p>
-            <div id="g_id_onload" data-client_id="632484167852-qcvo8enlbmn1skaanbtgrbpo7kebjkra.apps.googleusercontent.com" data-callback="onGoogleSignIn"></div>
-            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-size="large"></div>
+        <div class="auth-glass-card">
+            <div class="auth-header">
+                <h1 class="logo-glow">SAVESENSE</h1>
+                <p class="auth-tag">NEURAL COMMAND SENTINEL</p>
+            </div>
+            <div class="auth-body">
+                <p>Verify Identity to Access Intelligence</p>
+                <div id="g_id_onload" data-client_id="632484167852-qcvo8enlbmn1skaanbtgrbpo7kebjkra.apps.googleusercontent.com" data-callback="onGoogleSignIn"></div>
+                <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-size="large" data-text="signin_with"></div>
+            </div>
         </div>
     </div>
 
@@ -33,7 +38,7 @@
             </nav>
         </div>
         <div class="sidebar-footer">
-            <div class="theme-pill" onclick="toggleTheme()">🌓 Toggle Mode</div>
+            <div class="theme-pill" onclick="toggleTheme()">🌓 Toggle Theme</div>
             <div class="logout-link" onclick="terminateSession()">Terminate Session</div>
         </div>
     </aside>
@@ -42,7 +47,7 @@
         <header class="workspace-header">
             <div class="header-info">
                 <p class="label">Verified Sentinel</p>
-                <h1 id="u-name">Loading Profile...</h1>
+                <h1 id="u-name">Loading...</h1>
             </div>
         </header>
 
@@ -53,19 +58,19 @@
                     <input type="number" id="capital" placeholder="₹ 0.00" oninput="saveToCloud()">
                 </div>
                 <div class="glass-card">
-                    <span class="label">Health Score</span>
+                    <span class="label">Health Index</span>
                     <div id="score" class="big-stat">100</div>
                 </div>
                 <div class="glass-card span-2">
-                    <span class="label">Record Secure Entry</span>
+                    <span class="label">Execute Secure Entry</span>
                     <div class="input-group">
-                        <input id="exp-name" placeholder="Transaction Link">
+                        <input id="exp-name" placeholder="Transaction Name">
                         <input id="exp-amt" type="number" placeholder="₹">
                     </div>
-                    <button class="btn main-btn" onclick="addExpense()">Execute Entry</button>
+                    <button class="btn main-btn" onclick="addExpense()">Record Entry</button>
                 </div>
                 <div class="glass-card span-2">
-                    <span class="label">Monthly Analytics</span>
+                    <span class="label">Heatmap Analytics</span>
                     <div id="cal-body"></div>
                 </div>
             </div>
@@ -73,38 +78,28 @@
 
         <section id="behavior" class="view">
             <div class="bento-grid">
-                <div class="glass-card span-3">
-                    <span class="label">Neural Pattern Analysis</span>
-                    <div id="ai-status">Scanning Core...</div>
+                <div class="glass-card span-4">
+                    <span class="label">Neural Core Analysis</span>
+                    <div id="ai-status">Scanning...</div>
                     <p id="ai-insight"></p>
                     <div class="neural-vis">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
                     </div>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card span-2">
                     <span class="label">Savings Objective</span>
-                    <input type="number" id="goal-in" oninput="saveToCloud()">
+                    <input type="number" id="goal-in" oninput="saveToCloud()" placeholder="₹ Goal">
                     <div class="prog-bar"><div id="goal-bar"></div></div>
-                    <p id="goal-msg" class="tiny-text"></p>
+                    <p id="goal-msg"></p>
                 </div>
             </div>
         </section>
 
         <section id="social" class="view">
             <div class="bento-grid">
-                <div class="glass-card span-2">
-                    <span class="label">Invite Sentinel</span>
-                    <input type="email" id="f-email-req" placeholder="Sentinel Gmail">
-                    <button class="btn" onclick="sendRequest()">Dispatch Invite</button>
-                </div>
-                <div class="glass-card span-2">
-                    <span class="label">Inbound Links</span>
-                    <div id="pending-req-list"></div>
-                </div>
-                <div class="glass-card span-4">
-                    <span class="label">Connected Sentinels (Live Public Stats)</span>
-                    <div id="friend-list" class="stats-list"></div>
-                </div>
+                <div class="glass-card span-2"><span class="label">Network Invite</span><input type="email" id="f-email-req" placeholder="gmail"><button class="btn" onclick="sendRequest()">Dispatch</button></div>
+                <div class="glass-card span-2"><span class="label">Pending Links</span><div id="pending-req-list"></div></div>
+                <div class="glass-card span-4"><span class="label">Sentinel Visibility</span><div id="friend-list" class="stats-list"></div></div>
             </div>
         </section>
 
