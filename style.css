@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeakDetect | Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">Leak<span>Detect</span></div>
+            <nav>
+                <div class="nav-item active">📊 Dashboard</div>
+                <div class="nav-item">💸 Expenses</div>
+                <div class="nav-item">🧠 Personality</div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Financial Health Dashboard</h1>
+                <p id="date-display"></p>
+            </header>
+
+            <section class="stats-grid">
+                <div class="card glass-card">
+                    <h3>Available Capital</h3>
+                    <input type="number" id="income-input" placeholder="Enter Income" oninput="calculateHealth()">
+                    <p class="subtext">Allowances, Jobs, Grants</p>
+                </div>
+                <div class="card glass-card">
+                    <h3>Monthly Expenses</h3>
+                    <p class="amount">$<span id="total-exp-display">0</span></p>
+                    <p class="subtext" id="leak-status">No leaks detected yet</p>
+                </div>
+                <div class="card glass-card accent-card">
+                    <h3>Health Score</h3>
+                    <div class="score-circle">
+                        <span id="health-score">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="input-section glass-card">
+                <h3>Log New Spending</h3>
+                <div class="input-group">
+                    <input type="text" id="exp-name" placeholder="Item (e.g., Pizza)">
+                    <input type="number" id="exp-amount" placeholder="Amount ($)">
+                    <select id="exp-category">
+                        <option value="food">🍕 Food</option>
+                        <option value="transport">🚌 Transport</option>
+                        <option value="subs">📺 Subscriptions</option>
+                        <option value="misc">🎲 Miscellaneous</option>
+                    </select>
+                    <button onclick="addExpense()">Add Expense</button>
+                </div>
+            </section>
+
+            <section class="personality-section glass-card">
+                <h3>Spending Personality: <span id="personality-tag">Analyzing...</span></h3>
+                <p id="personality-desc">Start adding expenses to see your profile.</p>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
