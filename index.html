@@ -3,55 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaveSense | Elite Social Sentinel</title>
+    <title>SaveSense | Elite Neural Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-    <style>
-        :root {
-            --bg: #000000; --panel: #0a0a0a; 
-            --card: rgba(15, 15, 15, 0.9);
-            --accent: #007fff; --accent-glow: rgba(0, 127, 255, 0.3);
-            --text: #ffffff; --subtext: #94a3b8; --danger: #ff3131; --border: #1e293b;
-        }
-        body.light-mode {
-            --bg: #f8fafc; --panel: #ffffff;
-            --card: #f1f5f9; --text: #0f172a; --subtext: #64748b; --border: #cbd5e1;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s ease; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; overflow: hidden; }
-        
-        #auth-portal { position: fixed; inset: 0; background: var(--bg); z-index: 2000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(50px); }
-        aside { width: 300px; background: var(--panel); border-right: 1px solid var(--border); padding: 40px 28px; display: flex; flex-direction: column; }
-        .logo { font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 50px; }
-        .nav-item { padding: 18px 24px; margin-bottom: 12px; border-radius: 20px; cursor: pointer; color: var(--subtext); font-weight: 700; font-size: 14px; border: 1px solid transparent; }
-        .nav-item.active, .nav-item:hover { background: var(--card); color: var(--accent); border-color: var(--border); transform: translateX(8px); }
-        
-        main { flex: 1; padding: 50px; overflow-y: auto; }
-        .view { display: none; }
-        .view.active { display: block; }
-        .bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 36px; padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .span-2 { grid-column: span 2; }
-        .label { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block; }
-        
-        input { background: rgba(0,0,0,0.05); border: 1px solid var(--border); padding: 18px; border-radius: 18px; color: inherit; width: 100%; outline: none; margin-bottom: 15px; font-weight: 600; }
-        .btn { background: var(--accent); color: #fff; border: none; padding: 20px; border-radius: 22px; width: 100%; font-weight: 800; cursor: pointer; text-transform: uppercase; }
-        .row-item { display: flex; justify-content: space-between; align-items: center; padding: 22px; background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: 24px; margin-bottom: 12px; }
-        .strikethrough { opacity: 0.3; text-decoration: line-through; filter: grayscale(1); pointer-events: none; }
-        
-        .theme-toggle { margin-top: auto; padding: 15px; border-radius: 15px; border: 1px solid var(--border); text-align: center; cursor: pointer; font-weight: 800; font-size: 12px; margin-bottom: 15px; }
-        .logout-btn { color: var(--danger); font-size: 12px; cursor: pointer; font-weight: 800; text-align: center; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="auth-portal">
-        <div class="glass-card" style="text-align:center; width:400px;">
-            <h1 class="logo">SAVESENSE</h1>
-            <p style="margin-bottom:30px; opacity:0.6;">Obsidian Azure Sentinel</p>
+        <div class="glass-card" style="text-align:center; width:450px;">
+            <h1 class="logo" style="font-size: 45px;">SAVESENSE</h1>
+            <p style="margin-bottom:35px; opacity:0.6; font-weight:600;">Neural Cloud Financial Sentinel</p>
             <div id="g_id_onload" data-client_id="632484167852-qcvo8enlbmn1skaanbtgrbpo7kebjkra.apps.googleusercontent.com" data-callback="onGoogleSignIn"></div>
-            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black"></div>
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-size="large"></div>
         </div>
     </div>
 
@@ -59,11 +24,12 @@
         <div class="logo">SAVESENSE</div>
         <div class="nav-item active" onclick="switchView('overview', this)">📊 Intelligence</div>
         <div class="nav-item" onclick="switchView('social', this)">📩 Social Hub</div>
-        <div class="nav-item" onclick="switchView('splits', this)">⚖️ Split Hub</div>
-        <div class="nav-item" onclick="switchView('history', this)">🧾 Ledger</div>
-        
+        <div class="nav-item" onclick="switchView('splits', this)">⚖️ Network Splits</div>
+        <div class="nav-item" onclick="switchView('debts', this)">🤝 Debt Sentinel</div>
+        <div class="nav-item" onclick="switchView('savings', this)">🎯 Savings Goal</div>
+        <div class="nav-item" onclick="switchView('history', this)">🧾 Verified Ledger</div>
         <div class="theme-toggle" onclick="toggleTheme()">🌓 TOGGLE THEME</div>
-        <div class="logout-btn" onclick="terminateSession()">LOGOUT</div>
+        <div onclick="terminateSession()" style="color:var(--danger); font-weight:800; text-align:center; cursor:pointer; font-size:12px; margin-top:10px;">TERMINATE SESSION</div>
     </aside>
 
     <main>
@@ -71,34 +37,57 @@
             <div class="bento">
                 <div class="glass-card span-2">
                     <span class="label">Behavior AI Status</span>
-                    <div id="ai-status" style="font-size:24px; font-weight:800; color:var(--accent); margin-bottom:10px;">Scanning...</div>
-                    <p id="ai-insight" style="opacity:0.7; font-size:14px;"></p>
+                    <div id="ai-status" style="font-size:24px; font-weight:800; color:var(--accent);">Scanning...</div>
+                    <p id="ai-insight" style="font-size:13px; margin-top:10px; opacity:0.7;"></p>
+                    <div class="neural-graph">
+                        <div class="neural-bar"></div><div class="neural-bar"></div><div class="neural-bar"></div><div class="neural-bar"></div><div class="neural-bar"></div>
+                    </div>
                 </div>
-                <div class="glass-card"><span class="label">Total Allowance</span><input type="number" id="capital" oninput="saveToCloud()"></div>
-                <div class="glass-card"><span class="label">Account Health</span><div id="score" style="font-size:38px; font-weight:800; color:var(--accent);">100</div></div>
-                <div class="glass-card span-2"><span class="label">Secure Entry</span><input id="exp-name" placeholder="Item"><input id="exp-amt" type="number" placeholder="₹ Amount"><button class="btn" onclick="addExpense()">Record Entry</button></div>
-                <div class="glass-card span-2"><span class="label">Monthly Analytics</span><div id="cal-body" style="display:grid; grid-template-columns:repeat(7,1fr); gap:5px;"></div></div>
+                <div class="glass-card"><span class="label">Total Capital</span><input type="number" id="capital" placeholder="₹ 0.00" oninput="saveToCloud()"></div>
+                <div class="glass-card"><span class="label">Health Score</span><div id="score" style="font-size:42px; font-weight:800; color:var(--accent);">100</div></div>
+                <div class="glass-card span-2"><span class="label">Record Secure Entry</span><input id="exp-name" placeholder="Item Name"><input id="exp-amt" type="number" placeholder="₹ Amount"><button class="btn" onclick="addExpense()">Execute Entry</button></div>
+                <div class="glass-card span-2"><span class="label">Heatmap Intelligence</span><div id="cal-body"></div></div>
             </div>
         </section>
 
         <section id="social" class="view">
-            <h1>Social Hub Intelligence</h1>
+            <h1>Social Sentinel Network</h1>
             <div class="bento" style="margin-top:20px;">
-                <div class="glass-card span-2"><span class="label">Network Invite</span><input type="email" id="f-email-req" placeholder="Gmail address"><button class="btn" onclick="sendRequest()">Invite Sentinel</button></div>
-                <div class="glass-card span-2"><span class="label">Pending Requests</span><div id="pending-req-list"></div></div>
-                <div class="glass-card span-4"><span class="label">Connected Network (Public Metrics)</span><div id="friend-list"></div></div>
+                <div class="glass-card span-2"><span class="label">Invite Link</span><input type="email" id="f-email-req" placeholder="Sentinel Gmail"><button class="btn" onclick="sendRequest()">Dispatch Invite</button></div>
+                <div class="glass-card span-2"><span class="label">Cloud Requests</span><div id="pending-req-list"></div></div>
+                <div class="glass-card span-4"><span class="label">Connected Sentinels (Live Public Metrics)</span><div id="friend-list"></div></div>
             </div>
         </section>
 
         <section id="splits" class="view">
-            <h1>Cloud Split Monitor</h1>
+            <h1>Cloud Split Hub</h1>
             <div class="bento" style="margin-top:20px;">
-                <div class="glass-card span-2"><span class="label">New Split</span><input id="s-desc" placeholder="Event"><input id="s-total" type="number"><div id="f-selection" style="margin:15px 0;"></div><button class="btn" onclick="genSplit()">Execute Split</button></div>
-                <div class="glass-card span-2"><span class="label">Net Owed to Friends</span><div id="total-owed-ui" style="font-size:28px; font-weight:800; color:var(--danger); margin-bottom:20px;">₹0</div><div id="split-list"></div></div>
+                <div class="glass-card span-2"><span class="label">Initiate Split</span><input id="s-desc" placeholder="Event"><input id="s-total" type="number" placeholder="Total ₹"><div id="f-selection" style="margin:15px 0;"></div><button class="btn" onclick="genSplit()">Execute Split</button></div>
+                <div class="glass-card span-2"><span class="label">Net Owed to Friends</span><div id="total-owed-ui" style="font-size:30px; font-weight:800; color:var(--danger); margin-bottom:20px;">₹0</div><div id="split-list"></div></div>
             </div>
         </section>
 
-        <section id="history" class="view"><h1>Verified Ledger</h1><div id="ledger-list" style="margin-top:20px;"></div></section>
+        <section id="debts" class="view">
+            <h1>Debt Sentinel</h1>
+            <div class="bento" style="margin-top:20px;">
+                <div class="glass-card span-2"><span class="label">Log Borrowing</span><input id="d-name" placeholder="Friend"><input id="d-amt" type="number" placeholder="₹"><button class="btn" onclick="addDebt()">Log Debt</button></div>
+                <div class="glass-card span-2"><span class="label">Repayment Ledger</span><div id="debt-list"></div></div>
+            </div>
+        </section>
+
+        <section id="savings" class="view">
+            <h1>Savings Sentinel</h1>
+            <div class="glass-card" style="max-width: 650px; margin: 40px auto;">
+                <span class="label">Target Objective</span>
+                <input type="number" id="goal-in" placeholder="₹ Goal" oninput="saveToCloud()">
+                <div style="background:rgba(0,0,0,0.1); height:16px; border-radius:20px; margin:30px 0; overflow:hidden; border:1px solid var(--border);">
+                    <div id="goal-bar" style="height:100%; background:var(--accent); width:0%;"></div>
+                </div>
+                <p id="goal-msg" style="font-weight:800; text-align:right; color:var(--accent);"></p>
+            </div>
+        </section>
+
+        <section id="history" class="view"><h1>Verified Master Ledger</h1><div id="ledger-list" style="margin-top:30px;"></div></section>
     </main>
     <script src="script.js"></script>
 </body>

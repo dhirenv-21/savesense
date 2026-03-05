@@ -1,69 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeakDetect | Student Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">Leak<span>Detect</span></div>
-            <nav>
-                <div class="nav-item active">📊 Dashboard</div>
-                <div class="nav-item">💸 Expenses</div>
-                <div class="nav-item">🧠 Personality</div>
-            </nav>
-        </aside>
+/* ELITE CYBER-QUARTZ DESIGN SYSTEM */
+:root {
+    /* OBSIDIAN AZURE (DARK) */
+    --bg: #010409; 
+    --panel: #0d1117; 
+    --card: rgba(22, 27, 34, 0.8);
+    --accent: #007fff; 
+    --accent-glow: rgba(0, 127, 255, 0.2);
+    --text: #f0f6fc; 
+    --subtext: #8b949e; 
+    --danger: #f85149; 
+    --border: #30363d;
+}
 
-        <main class="main-content">
-            <header>
-                <h1>Financial Health Dashboard</h1>
-                <p id="date-display"></p>
-            </header>
+/* FROST AZURE (LIGHT MODE) */
+body.light-mode {
+    --bg: #f6f8fa; 
+    --panel: #ffffff;
+    --card: rgba(255, 255, 255, 0.9);
+    --text: #1f2328; 
+    --subtext: #656d76; 
+    --border: #d0d7de;
+    --accent: #0066cc;
+}
 
-            <section class="stats-grid">
-                <div class="card glass-card">
-                    <h3>Available Capital</h3>
-                    <input type="number" id="income-input" placeholder="Enter Income" oninput="calculateHealth()">
-                    <p class="subtext">Allowances, Jobs, Grants</p>
-                </div>
-                <div class="card glass-card">
-                    <h3>Monthly Expenses</h3>
-                    <p class="amount">$<span id="total-exp-display">0</span></p>
-                    <p class="subtext" id="leak-status">No leaks detected yet</p>
-                </div>
-                <div class="card glass-card accent-card">
-                    <h3>Health Score</h3>
-                    <div class="score-circle">
-                        <span id="health-score">0</span>
-                    </div>
-                </div>
-            </section>
+/* CORE LAYOUT */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+}
 
-            <section class="input-section glass-card">
-                <h3>Log New Spending</h3>
-                <div class="input-group">
-                    <input type="text" id="exp-name" placeholder="Item (e.g., Pizza)">
-                    <input type="number" id="exp-amount" placeholder="Amount ($)">
-                    <select id="exp-category">
-                        <option value="food">🍕 Food</option>
-                        <option value="transport">🚌 Transport</option>
-                        <option value="subs">📺 Subscriptions</option>
-                        <option value="misc">🎲 Miscellaneous</option>
-                    </select>
-                    <button onclick="addExpense()">Add Expense</button>
-                </div>
-            </section>
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg); 
+    color: var(--text); 
+    height: 100vh; 
+    display: flex; 
+    overflow: hidden; 
+}
 
-            <section class="personality-section glass-card">
-                <h3>Spending Personality: <span id="personality-tag">Analyzing...</span></h3>
-                <p id="personality-desc">Start adding expenses to see your profile.</p>
-            </section>
-        </main>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+/* SIDEBAR NAVIGATION */
+aside { 
+    width: 300px; 
+    background: var(--panel); 
+    border-right: 1px solid var(--border); 
+    padding: 40px 25px; 
+    display: flex; 
+    flex-direction: column; 
+    z-index: 100;
+}
+
+.logo { 
+    font-size: 30px; 
+    font-weight: 800; 
+    color: var(--accent); 
+    margin-bottom: 50px; 
+    letter-spacing: -1.5px; 
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+.nav-item { 
+    padding: 18px 22px; 
+    margin-bottom: 10px; 
+    border-radius: 18px; 
+    cursor: pointer; 
+    color: var(--subtext); 
+    font-weight: 700; 
+    font-size: 14px; 
+    border: 1px solid transparent; 
+}
+
+.nav-item.active, .nav-item:hover { 
+    background: var(--card); 
+    color: var(--accent); 
+    border-color: var(--border); 
+    transform: translateX(8px); 
+}
+
+/* MAIN CONTENT AREA */
+main { 
+    flex: 1; 
+    padding: 50px; 
+    overflow-y: auto; 
+    scroll-behavior: smooth; 
+}
+
+.view { 
+    display: none; 
+}
+
+.view.active { 
+    display: block; 
+    animation: slideIn 0.5s ease-out; 
+}
+
+@keyframes slideIn { 
+    from { opacity: 0; transform: translateY(20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* BENTO GRID ARCHITECTURE */
+.bento { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 24px; 
+}
+
+.glass-card { 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    border-radius: 32px; 
+    padding: 32px; 
+    backdrop-filter: blur(25px); 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15); 
+}
+
+.glass-card:hover { 
+    border-color: var(--accent); 
+    transform: translateY(-5px); 
+}
+
+.span-2 { grid-column: span 2; }
+.span-4 { grid-column: span 4; }
+
+.label { 
+    font-size: 11px; 
+    font-weight: 800; 
+    color: var(--accent); 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 20px; 
+    display: block; 
+}
+
+/* UI ELEMENTS */
+input { 
+    background: rgba(0,0,0,0.15); 
+    border: 1px solid var(--border); 
+    padding: 18px; 
+    border-radius: 16px; 
+    color: inherit; 
+    width: 100%; 
+    outline: none; 
+    margin-bottom: 15px; 
+    font-weight: 600; 
+}
+
+input:focus { 
+    border-color: var(--accent); 
+    box-shadow: 0 0 10px var(--accent-glow); 
+}
+
+.btn { 
+    background: var(--accent); 
+    color: #fff; 
+    border: none; 
+    padding: 18px; 
+    border-radius: 16px; 
+    width: 100%; 
+    font-weight: 800; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+}
+
+.btn:hover { 
+    filter: brightness(1.1); 
+    box-shadow: 0 0 20px var(--accent-glow); 
+}
+
+.row-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 22px; 
+    background: rgba(255,255,255,0.02); 
+    border: 1px solid var(--border); 
+    border-radius: 24px; 
+    margin-bottom: 12px; 
+}
+
+.strikethrough { 
+    opacity: 0.3; 
+    text-decoration: line-through; 
+    filter: grayscale(1); 
+}
+
+/* NEURAL AI VISUALIZER */
+.neural-graph { 
+    display: flex; 
+    align-items: flex-end; 
+    gap: 8px; 
+    height: 120px; 
+    margin-top: 15px; 
+}
+
+.neural-bar { 
+    flex: 1; 
+    background: var(--accent); 
+    border-radius: 6px 6px 0 0; 
+    min-height: 10%; 
+    box-shadow: 0 0 10px var(--accent-glow); 
+    animation: barPulse 2s infinite ease-in-out;
+}
+
+@keyframes barPulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.4); }
+}
+
+/* CALENDAR HEATMAP */
+#cal-body { 
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 8px; 
+    margin-top: 15px; 
+}
+
+.cal-day { 
+    background: rgba(0,0,0,0.1); 
+    border: 1px solid var(--border); 
+    border-radius: 12px; 
+    padding: 12px; 
+    min-height: 80px; 
+    font-size: 12px; 
+}
+
+/* AUTH & THEME CONTROLS */
+#auth-portal { 
+    position: fixed; 
+    inset: 0; 
+    background: var(--bg); 
+    z-index: 2000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    backdrop-filter: blur(60px); 
+}
+
+.theme-toggle { 
+    margin-top: auto; 
+    padding: 15px; 
+    border-radius: 15px; 
+    border: 1px solid var(--border); 
+    text-align: center; 
+    cursor: pointer; 
+    font-size: 12px; 
+    font-weight: 800; 
+    margin-bottom: 15px; 
+}
+
+.logout-btn { 
+    color: var(--danger); 
+    font-size: 12px; 
+    cursor: pointer; 
+    font-weight: 800; 
+    text-align: center; 
+    padding: 15px; 
+    border-top: 1px solid var(--border); 
+}
