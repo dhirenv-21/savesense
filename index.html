@@ -12,82 +12,83 @@
 </head>
 <body>
     <div id="auth-portal">
-        <div class="glass-card" style="text-align:center; width:450px;">
-            <h1 class="logo" style="font-size: 45px;">SAVESENSE</h1>
-            <p style="margin-bottom:35px; opacity:0.6; font-weight:600;">Neural Cloud Financial Sentinel</p>
+        <div class="auth-card">
+            <h1 class="logo pulse">SAVESENSE</h1>
+            <p class="auth-sub">Neural Cloud Financial Sentinel</p>
             <div id="g_id_onload" data-client_id="632484167852-qcvo8enlbmn1skaanbtgrbpo7kebjkra.apps.googleusercontent.com" data-callback="onGoogleSignIn"></div>
             <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-size="large"></div>
         </div>
     </div>
 
-    <aside>
+    <aside class="sidebar">
         <div class="logo">SAVESENSE</div>
-        <div class="nav-item active" onclick="switchView('overview', this)">📊 Intelligence</div>
-        <div class="nav-item" onclick="switchView('social', this)">📩 Social Hub</div>
-        <div class="nav-item" onclick="switchView('splits', this)">⚖️ Network Splits</div>
-        <div class="nav-item" onclick="switchView('debts', this)">🤝 Debt Sentinel</div>
-        <div class="nav-item" onclick="switchView('savings', this)">🎯 Savings Goal</div>
-        <div class="nav-item" onclick="switchView('history', this)">🧾 Verified Ledger</div>
-        <div class="theme-toggle" onclick="toggleTheme()">🌓 TOGGLE THEME</div>
-        <div onclick="terminateSession()" style="color:var(--danger); font-weight:800; text-align:center; cursor:pointer; font-size:12px; margin-top:10px;">TERMINATE SESSION</div>
+        <nav>
+            <div class="nav-item active" onclick="switchView('overview', this)">📊 Intelligence</div>
+            <div class="nav-item" onclick="switchView('social', this)">📩 Social Hub</div>
+            <div class="nav-item" onclick="switchView('splits', this)">⚖️ Split Hub</div>
+            <div class="nav-item" onclick="switchView('debts', this)">🤝 Debt Ledger</div>
+            <div class="nav-item" onclick="switchView('savings', this)">🎯 Savings Goal</div>
+            <div class="nav-item" onclick="switchView('history', this)">🧾 Master Ledger</div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="theme-toggle" onclick="toggleTheme()">🌓 TOGGLE THEME</div>
+            <div class="terminate-btn" onclick="terminateSession()">TERMINATE SESSION</div>
+        </div>
     </aside>
 
-    <main>
+    <main class="content">
         <section id="overview" class="view active">
-            <div class="bento">
-                <div class="glass-card span-2">
-                    <span class="label">Behavior AI Status</span>
-                    <div id="ai-status" style="font-size:24px; font-weight:800; color:var(--accent);">Scanning...</div>
-                    <p id="ai-insight" style="font-size:13px; margin-top:10px; opacity:0.7;"></p>
-                    <div class="neural-graph">
-                        <div class="neural-bar"></div><div class="neural-bar"></div><div class="neural-bar"></div><div class="neural-bar"></div><div class="neural-bar"></div>
+            <header>
+                <span class="label">Verified Sentinel</span>
+                <h1 id="u-name">Loading Profile...</h1>
+            </header>
+            <div class="bento-grid">
+                <div class="glass-card ai-card span-2">
+                    <span class="label">Behavior AI Core</span>
+                    <div id="ai-status">Scanning...</div>
+                    <p id="ai-insight"></p>
+                    <div class="neural-vis">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
                     </div>
                 </div>
                 <div class="glass-card"><span class="label">Total Capital</span><input type="number" id="capital" placeholder="₹ 0.00" oninput="saveToCloud()"></div>
-                <div class="glass-card"><span class="label">Health Score</span><div id="score" style="font-size:42px; font-weight:800; color:var(--accent);">100</div></div>
-                <div class="glass-card span-2"><span class="label">Record Secure Entry</span><input id="exp-name" placeholder="Item Name"><input id="exp-amt" type="number" placeholder="₹ Amount"><button class="btn" onclick="addExpense()">Execute Entry</button></div>
+                <div class="glass-card"><span class="label">Health Score</span><div id="score" class="glow-text">100</div></div>
+                <div class="glass-card span-2">
+                    <span class="label">Record secure entry</span>
+                    <div class="input-row"><input id="exp-name" placeholder="Item"><input id="exp-amt" type="number" placeholder="₹"></div>
+                    <button class="btn main-btn" onclick="addExpense()">Execute Transaction</button>
+                </div>
                 <div class="glass-card span-2"><span class="label">Heatmap Intelligence</span><div id="cal-body"></div></div>
             </div>
         </section>
 
         <section id="social" class="view">
-            <h1>Social Sentinel Network</h1>
-            <div class="bento" style="margin-top:20px;">
-                <div class="glass-card span-2"><span class="label">Invite Link</span><input type="email" id="f-email-req" placeholder="Sentinel Gmail"><button class="btn" onclick="sendRequest()">Dispatch Invite</button></div>
+            <div class="bento-grid">
+                <div class="glass-card span-2"><span class="label">Invite Link</span><input type="email" id="f-email-req" placeholder="gmail"><button class="btn" onclick="sendRequest()">Dispatch</button></div>
                 <div class="glass-card span-2"><span class="label">Cloud Requests</span><div id="pending-req-list"></div></div>
-                <div class="glass-card span-4"><span class="label">Connected Sentinels (Live Public Metrics)</span><div id="friend-list"></div></div>
+                <div class="glass-card span-4"><span class="label">Connected Sentinels (Live Visibility)</span><div id="friend-list" class="stats-list"></div></div>
             </div>
         </section>
 
         <section id="splits" class="view">
-            <h1>Cloud Split Hub</h1>
-            <div class="bento" style="margin-top:20px;">
-                <div class="glass-card span-2"><span class="label">Initiate Split</span><input id="s-desc" placeholder="Event"><input id="s-total" type="number" placeholder="Total ₹"><div id="f-selection" style="margin:15px 0;"></div><button class="btn" onclick="genSplit()">Execute Split</button></div>
-                <div class="glass-card span-2"><span class="label">Net Owed to Friends</span><div id="total-owed-ui" style="font-size:30px; font-weight:800; color:var(--danger); margin-bottom:20px;">₹0</div><div id="split-list"></div></div>
+            <div class="bento-grid">
+                <div class="glass-card span-2"><span class="label">Create Split</span><input id="s-desc" placeholder="Event"><input id="s-total" type="number"><div id="f-selection" class="chip-container"></div><button class="btn" onclick="genSplit()">Distribute</button></div>
+                <div class="glass-card span-2"><span class="label">Net Receivables</span><div id="total-owed-ui" class="debt-total">₹0</div><div id="split-list" class="scroll-list"></div></div>
             </div>
         </section>
 
         <section id="debts" class="view">
-            <h1>Debt Sentinel</h1>
-            <div class="bento" style="margin-top:20px;">
-                <div class="glass-card span-2"><span class="label">Log Borrowing</span><input id="d-name" placeholder="Friend"><input id="d-amt" type="number" placeholder="₹"><button class="btn" onclick="addDebt()">Log Debt</button></div>
-                <div class="glass-card span-2"><span class="label">Repayment Ledger</span><div id="debt-list"></div></div>
+            <div class="bento-grid">
+                <div class="glass-card span-2"><span class="label">Log Loan</span><input id="d-name" placeholder="Lender"><input id="d-amt" type="number"><button class="btn" onclick="addDebt()">Execute</button></div>
+                <div class="glass-card span-2"><span class="label">Tracker</span><div id="debt-list" class="scroll-list"></div></div>
             </div>
         </section>
 
         <section id="savings" class="view">
-            <h1>Savings Sentinel</h1>
-            <div class="glass-card" style="max-width: 650px; margin: 40px auto;">
-                <span class="label">Target Objective</span>
-                <input type="number" id="goal-in" placeholder="₹ Goal" oninput="saveToCloud()">
-                <div style="background:rgba(0,0,0,0.1); height:16px; border-radius:20px; margin:30px 0; overflow:hidden; border:1px solid var(--border);">
-                    <div id="goal-bar" style="height:100%; background:var(--accent); width:0%;"></div>
-                </div>
-                <p id="goal-msg" style="font-weight:800; text-align:right; color:var(--accent);"></p>
-            </div>
+            <div class="glass-card goal-card"><span class="label">Objective</span><input type="number" id="goal-in" oninput="saveToCloud()"><div class="progress-container"><div id="goal-bar"></div></div><p id="goal-msg"></p></div>
         </section>
 
-        <section id="history" class="view"><h1>Verified Master Ledger</h1><div id="ledger-list" style="margin-top:30px;"></div></section>
+        <section id="history" class="view"><div class="glass-card span-4"><span class="label">Master Ledger</span><div id="ledger-list" class="ledger-container"></div></div></section>
     </main>
     <script src="script.js"></script>
 </body>
